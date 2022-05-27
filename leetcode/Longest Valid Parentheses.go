@@ -3,6 +3,7 @@ package leetcode
 import "fmt"
 
 func longestValidParentheses(s string) int {
+	res := 0
 	stack := []int{0}
 	leftCount := 0
 	rightCount := 0
@@ -19,13 +20,9 @@ func longestValidParentheses(s string) int {
 			rightCount++
 			stack[len(stack)-1] += 2
 			value := stack[len(stack)-2] + stack[len(stack)-1]
+			res = max(res, value)
 			stack = append(stack[:len(stack)-2], value)
 		}
-	}
-
-	res := 0
-	for _, v := range stack {
-		res = max(res, v)
 	}
 	return res
 }
