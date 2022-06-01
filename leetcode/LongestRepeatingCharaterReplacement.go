@@ -8,34 +8,27 @@ func characterReplacement(s string, k int) int {
 	}
 
 	res := 0
-	r := 0
+	right := 0
 	mapChar[int(s[0])]++
 	maxCount := 1
-	for l := 0; l < len(s); l++ {
-		for r+1-l-maxCount <= k {
-			if res < r+1-l {
-				res = r + 1 - l
+	for left := 0; left < len(s); left++ {
+		for right-left+1-maxCount <= k {
+			if res < right-left+1 {
+				res = right - left + 1
 			}
-			r++
-			if r > len(s)-1 {
+			right++
+			if right > len(s)-1 {
 				break
 			}
-			mapChar[int(s[r])]++
-			maxCount = max(maxCount, mapChar[int(s[r])])
+			mapChar[int(s[right])]++
+			maxCount = max(maxCount, mapChar[int(s[right])])
 
 		}
-		if r > len(s)-1 {
+		if right > len(s)-1 {
 			break
 		}
-		mapChar[int(s[l])]--
+		mapChar[int(s[left])]--
 	}
 
 	return res
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
 }
