@@ -33,6 +33,7 @@ func (this *Codec) serialize(root *TreeNode) string {
 
 // Deserializes your encoded data to tree.
 func (this *Codec) deserialize(data string) *TreeNode {
+	//remove '[' and ']'
 	data = data[1 : len(data)-1]
 	if data == "nil" {
 		return nil
@@ -88,8 +89,8 @@ func TestCodec() {
 
 	ser := Constructor()
 	deser := Constructor()
-	data := ser.serialize(nil)
+	data := ser.serialize(&node1)
 	fmt.Println(data)
 	ans := deser.deserialize(data)
-	fmt.Println(ans)
+	fmt.Printf("root: %s", ans)
 }
