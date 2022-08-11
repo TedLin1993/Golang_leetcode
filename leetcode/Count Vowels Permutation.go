@@ -1,27 +1,33 @@
 package leetcode
 
+import (
+	"fmt"
+
+	"gonum.org/v1/gonum/mat"
+)
+
 func countVowelPermutation(n int) int {
-	dp := make([]int, 5)
+	v := []float64{1, 1, 1, 1, 1}
+	vowels := mat.NewDense(5, 1, v)
 
-	//a, e , i, o ,u represent dp[0],dp[1],dp[2],dp[3],dp[4]
-	//when n=1, all element is 1
-	for i := 0; i < 5; i++ {
-		dp[i] = 1
-	}
+	data := []float64{}
+	data = append(data, []float64{0, 1, 1, 0, 1}...)
+	data = append(data, []float64{1, 0, 1, 0, 0}...)
+	data = append(data, []float64{0, 1, 0, 1, 0}...)
+	data = append(data, []float64{0, 0, 1, 0, 0}...)
+	data = append(data, []float64{0, 0, 1, 1, 0}...)
 
-	mod := 1000000007
-	for i := 1; i < n; i++ {
-		nextDp := make([]int, 5)
-		nextDp[0] = (dp[1] + dp[2] + dp[4]) % mod
-		nextDp[1] = (dp[0] + dp[2]) % mod
-		nextDp[2] = (dp[1] + dp[3]) % mod
-		nextDp[3] = dp[2] % mod
-		nextDp[4] = (dp[2] + dp[3]) % mod
-		dp = nextDp
-	}
-	res := 0
-	for i := 0; i < len(dp); i++ {
-		res += dp[i]
-	}
-	return res % mod
+	a := mat.NewDense(5, 5, data)
+	a.Pow(a, n-1)
+
+	var m mat.Dense
+	m.Mul(a, vowels)
+	// fmt.Println(mat.Formatted(&m))
+	return int(mat.Sum(m.Grow(0, 5)))
+}
+
+func Test_countVowelPermutation() {
+	fmt.Println(countVowelPermutation(1)) //5
+	fmt.Println(countVowelPermutation(2)) //10
+	fmt.Println(countVowelPermutation(5)) //68
 }
