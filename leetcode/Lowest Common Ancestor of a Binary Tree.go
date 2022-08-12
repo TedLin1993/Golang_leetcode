@@ -1,6 +1,6 @@
 package leetcode
 
-func lowestCommonAncestor(currentNode, p, q *TreeNode) *TreeNode {
+func lowestCommonAncestor_BT(currentNode, p, q *TreeNode) *TreeNode {
 	if currentNode == nil {
 		return nil
 	}
