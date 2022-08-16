@@ -3,19 +3,6 @@ package leetcode
 import "fmt"
 
 func romanToInt(s string) int {
-	romanIntMap := initRomanIntMap()
-	res := romanIntMap[s[len(s)-1]]
-	for i := len(s) - 2; i >= 0; i-- {
-		if romanIntMap[s[i]] >= romanIntMap[s[i+1]] {
-			res += romanIntMap[s[i]]
-		} else {
-			res -= romanIntMap[s[i]]
-		}
-	}
-	return res
-}
-
-func initRomanIntMap() map[byte]int {
 	romanIntMap := map[byte]int{
 		'I': 1,
 		'V': 5,
@@ -25,7 +12,15 @@ func initRomanIntMap() map[byte]int {
 		'D': 500,
 		'M': 1000,
 	}
-	return romanIntMap
+	res := romanIntMap[s[len(s)-1]]
+	for i := len(s) - 2; i >= 0; i-- {
+		if romanIntMap[s[i]] >= romanIntMap[s[i+1]] {
+			res += romanIntMap[s[i]]
+		} else {
+			res -= romanIntMap[s[i]]
+		}
+	}
+	return res
 }
 
 func Test_romanToInt() {
