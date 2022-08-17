@@ -2,7 +2,7 @@ package leetcode
 
 import "fmt"
 
-func isMatch(s string, p string) bool {
+func isMatch_REM(s string, p string) bool {
 	dp := make([][]bool, len(s)+1)
 	for i := 0; i < len(dp); i++ {
 		dp[i] = make([]bool, len(p)+1)
@@ -34,23 +34,23 @@ func isMatch(s string, p string) bool {
 }
 
 func TestRegularExpressionMatching() {
-	fmt.Println(isMatch("aa", "a"))                                   //false
-	fmt.Println(isMatch("aaa", "ab*a"))                               //false
-	fmt.Println(isMatch("abcd", "d*"))                                //false
-	fmt.Println(isMatch("aa", "a*"))                                  //true
-	fmt.Println(isMatch("ab", ".*"))                                  //true
-	fmt.Println(isMatch("abcasdas", ".*"))                            //true
-	fmt.Println(isMatch("aab", "c*a*b"))                              //true
-	fmt.Println(isMatch("aaa", "a*a"))                                //true
-	fmt.Println(isMatch("aaaaaaaa", "a*aa"))                          //true
-	fmt.Println(isMatch("aaab", "a*ab"))                              //true
-	fmt.Println(isMatch("aa", "a*b*"))                                //true
-	fmt.Println(isMatch("aaaa", "aa*a"))                              //true
-	fmt.Println(isMatch("sippi", "si.*"))                             //true
-	fmt.Println(isMatch("sippi", "s*p*."))                            //false
-	fmt.Println(isMatch("ippi", "s*p*."))                             //false
-	fmt.Println(isMatch("ba", ".*a*a"))                               //true
-	fmt.Println(isMatch("abcaaaaaaabaabcabac", ".*ab.a.*a*a*.*b*b*")) //true
-	fmt.Println(isMatch("aaa", "ab*a*c*a"))                           //true
-	fmt.Println(isMatch("aaabaaaababcbccbaab", "c*c*.*c*a*..*c*"))    //true
+	fmt.Println(isMatch_REM("aa", "a"))                                   //false
+	fmt.Println(isMatch_REM("aaa", "ab*a"))                               //false
+	fmt.Println(isMatch_REM("abcd", "d*"))                                //false
+	fmt.Println(isMatch_REM("aa", "a*"))                                  //true
+	fmt.Println(isMatch_REM("ab", ".*"))                                  //true
+	fmt.Println(isMatch_REM("abcasdas", ".*"))                            //true
+	fmt.Println(isMatch_REM("aab", "c*a*b"))                              //true
+	fmt.Println(isMatch_REM("aaa", "a*a"))                                //true
+	fmt.Println(isMatch_REM("aaaaaaaa", "a*aa"))                          //true
+	fmt.Println(isMatch_REM("aaab", "a*ab"))                              //true
+	fmt.Println(isMatch_REM("aa", "a*b*"))                                //true
+	fmt.Println(isMatch_REM("aaaa", "aa*a"))                              //true
+	fmt.Println(isMatch_REM("sippi", "si.*"))                             //true
+	fmt.Println(isMatch_REM("sippi", "s*p*."))                            //false
+	fmt.Println(isMatch_REM("ippi", "s*p*."))                             //false
+	fmt.Println(isMatch_REM("ba", ".*a*a"))                               //true
+	fmt.Println(isMatch_REM("abcaaaaaaabaabcabac", ".*ab.a.*a*a*.*b*b*")) //true
+	fmt.Println(isMatch_REM("aaa", "ab*a*c*a"))                           //true
+	fmt.Println(isMatch_REM("aaabaaaababcbccbaab", "c*c*.*c*a*..*c*"))    //true
 }
