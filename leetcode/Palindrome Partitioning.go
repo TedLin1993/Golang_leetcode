@@ -12,7 +12,7 @@ func partitionPalinrome(s string) [][]string {
 func partitionRecur(s string) [][]string {
 	res := [][]string{}
 	for i := 1; i <= len(s); i++ {
-		if !isPalindrome(s[0:i]) {
+		if !ispartitionPalinromePalindrome(s[0:i]) {
 			continue
 		}
 		if i == len(s) {
@@ -37,7 +37,7 @@ func partitionRecur(s string) [][]string {
 	return res
 }
 
-func isPalindrome(s string) bool {
+func ispartitionPalinromePalindrome(s string) bool {
 	left := 0
 	right := len(s) - 1
 	for left <= right {
