@@ -7,15 +7,15 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-//Definition for a Node.
-type Node struct {
+// Definition for a Node_Populating_Next_Right_Pointers_in_Each_Node.
+type Node_Populating_Next_Right_Pointers_in_Each_Node struct {
 	Val   int
-	Left  *Node
-	Right *Node
-	Next  *Node
+	Left  *Node_Populating_Next_Right_Pointers_in_Each_Node
+	Right *Node_Populating_Next_Right_Pointers_in_Each_Node
+	Next  *Node_Populating_Next_Right_Pointers_in_Each_Node
 }
 
-//Definition for singly-linked list.
+// Definition for singly-linked list.
 type ListNode struct {
 	Val  int
 	Next *ListNode
@@ -72,4 +72,9 @@ func (h *MinHeap) Pop() interface{} {
 	x := old[n-1]
 	*h = old[0 : n-1]
 	return x
+}
+
+type Node struct {
+	Val      int
+	Children []*Node
 }
