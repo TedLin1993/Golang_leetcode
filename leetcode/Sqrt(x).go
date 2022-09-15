@@ -8,7 +8,7 @@ func mySqrt(x int) int {
 	}
 	left, right := 1, x/2
 	for left < right {
-		mid := (left + right + 1) / 2
+		mid := left + (right-left+1)/2
 		if mid*mid > x {
 			right = mid - 1
 		} else {
