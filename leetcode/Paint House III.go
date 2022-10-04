@@ -5,7 +5,7 @@ import (
 	"math"
 )
 
-func minCost(houses []int, cost [][]int, m int, n int, target int) int {
+func minCost_paint(houses []int, cost [][]int, m int, n int, target int) int {
 	dp := make([][][]int, m+1) //[house][color][target]
 	for i := 0; i < m+1; i++ {
 		dp[i] = make([][]int, n+1)
@@ -61,7 +61,7 @@ func minCost(houses []int, cost [][]int, m int, n int, target int) int {
 }
 
 func TestminCost() {
-	fmt.Println(minCost([]int{0, 0, 0, 0, 0}, [][]int{{1, 10}, {10, 1}, {10, 1}, {1, 10}, {5, 1}}, 5, 2, 3)) //9
-	fmt.Println(minCost([]int{0, 2, 1, 2, 0}, [][]int{{1, 10}, {10, 1}, {10, 1}, {1, 10}, {5, 1}}, 5, 2, 3)) //11
-	fmt.Println(minCost([]int{3, 1, 2, 3}, [][]int{{1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}}, 4, 3, 3))    //-1
+	fmt.Println(minCost_paint([]int{0, 0, 0, 0, 0}, [][]int{{1, 10}, {10, 1}, {10, 1}, {1, 10}, {5, 1}}, 5, 2, 3)) //9
+	fmt.Println(minCost_paint([]int{0, 2, 1, 2, 0}, [][]int{{1, 10}, {10, 1}, {10, 1}, {1, 10}, {5, 1}}, 5, 2, 3)) //11
+	fmt.Println(minCost_paint([]int{3, 1, 2, 3}, [][]int{{1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}}, 4, 3, 3))    //-1
 }
