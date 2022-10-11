@@ -8,7 +8,7 @@ type MyCalendar struct {
 	calendars [][]int
 }
 
-func Constructor() MyCalendar {
+func Constructor_MyCalendar() MyCalendar {
 	return MyCalendar{}
 }
 
@@ -57,7 +57,7 @@ func (this *MyCalendar) Book(start int, end int) bool {
  * param_1 := obj.Book(start,end);
  */
 func TestMyCalendar() {
-	obj := Constructor()
+	obj := Constructor_MyCalendar()
 	fmt.Println(obj.Book(20, 29)) //true
 	fmt.Println(obj.Book(13, 22)) //false
 	fmt.Println(obj.Book(44, 50)) //true
