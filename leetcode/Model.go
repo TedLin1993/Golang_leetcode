@@ -78,3 +78,11 @@ type Node struct {
 	Val      int
 	Children []*Node
 }
+
+func maxArr(arr []int) int {
+	res := arr[0]
+	for i := 1; i < len(arr); i++ {
+		res = max(res, arr[i])
+	}
+	return res
+}
