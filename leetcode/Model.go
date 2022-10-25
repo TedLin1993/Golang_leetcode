@@ -7,12 +7,12 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-// Definition for a Node_Populating_Next_Right_Pointers_in_Each_Node.
-type Node_Populating_Next_Right_Pointers_in_Each_Node struct {
+// Definition for a NextTreeNode.
+type NextTreeNode struct {
 	Val   int
-	Left  *Node_Populating_Next_Right_Pointers_in_Each_Node
-	Right *Node_Populating_Next_Right_Pointers_in_Each_Node
-	Next  *Node_Populating_Next_Right_Pointers_in_Each_Node
+	Left  *NextTreeNode
+	Right *NextTreeNode
+	Next  *NextTreeNode
 }
 
 // Definition for singly-linked list.
