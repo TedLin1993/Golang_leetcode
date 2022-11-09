@@ -14,7 +14,7 @@ type TimestampValue struct {
 	Timestamp int
 }
 
-func Constructor() TimeMap {
+func TimeMapConstructor() TimeMap {
 	return TimeMap{TimestampValueMap: make(map[string][]TimestampValue)}
 }
 
@@ -39,7 +39,7 @@ func (this *TimeMap) Get(key string, timestamp int) string {
 }
 
 func Test_TimeBasedKey_ValueStore() {
-	timeMap := Constructor()
+	timeMap := TimeMapConstructor()
 	timeMap.Set("foo", "bar", 1)       // store the key "foo" and value "bar" along with timestamp = 1.
 	fmt.Println(timeMap.Get("foo", 1)) // return "bar"
 	fmt.Println(timeMap.Get("foo", 3)) // return "bar", since there is no value corresponding to foo at timestamp 3 and timestamp 2, then the only value is at timestamp 1 is "bar".
