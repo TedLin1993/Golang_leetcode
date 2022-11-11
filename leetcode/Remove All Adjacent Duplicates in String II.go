@@ -2,7 +2,7 @@ package leetcode
 
 import "fmt"
 
-func removeDuplicates(s string, k int) string {
+func removeDuplicatesII(s string, k int) string {
 	stack := []string{string(s[0])}
 	for i := 1; i < len(s); i++ {
 		if len(stack) > 0 {
@@ -27,9 +27,9 @@ func removeDuplicates(s string, k int) string {
 	return res
 }
 
-func TestremoveDuplicates() {
-	fmt.Println(removeDuplicates("aaa", 3))                  //""
-	fmt.Println(removeDuplicates("abcd", 2))                 //"abcd"
-	fmt.Println(removeDuplicates("deeedbbcccbdaa", 3))       //"aa"
-	fmt.Println(removeDuplicates("pbbcggttciiippooaais", 2)) //"ps"
+func TestremoveDuplicatesII() {
+	fmt.Println(removeDuplicatesII("aaa", 3))                  //""
+	fmt.Println(removeDuplicatesII("abcd", 2))                 //"abcd"
+	fmt.Println(removeDuplicatesII("deeedbbcccbdaa", 3))       //"aa"
+	fmt.Println(removeDuplicatesII("pbbcggttciiippooaais", 2)) //"ps"
 }
