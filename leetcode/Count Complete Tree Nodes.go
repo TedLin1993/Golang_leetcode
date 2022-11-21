@@ -13,7 +13,8 @@ func countNodes(root *TreeNode) int {
 			res += 1 << leftDepth
 			node = node.Right
 		} else {
-
+			res += 1 << rightDepth
+			node = node.Left
 		}
 	}
 	return res
