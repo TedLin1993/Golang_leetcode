@@ -6,7 +6,7 @@ type StockSpanner struct {
 	stack [][2]int
 }
 
-func Constructor() StockSpanner {
+func Constructor_StockSpanner() StockSpanner {
 	return StockSpanner{}
 }
 
@@ -21,7 +21,7 @@ func (this *StockSpanner) Next(price int) int {
 }
 
 func Test_StockSpanner() {
-	stockSpanner := Constructor()
+	stockSpanner := Constructor_StockSpanner()
 	fmt.Println(stockSpanner.Next(100)) //1
 	fmt.Println(stockSpanner.Next(80))  //1
 	fmt.Println(stockSpanner.Next(60))  //1

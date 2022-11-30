@@ -17,8 +17,10 @@ func findWinners(matches [][]int) [][]int {
 		loser := matches[i][1]
 		noLoseMap[loser] = false
 		if _, exist := oneLoseMap[loser]; !exist {
+			//never lose before
 			oneLoseMap[loser] = true
 		} else {
+			//lose over than once
 			oneLoseMap[loser] = false
 		}
 	}
