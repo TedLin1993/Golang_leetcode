@@ -6,21 +6,21 @@ import (
 )
 
 func frequencySort(s string) string {
-	freqMap := make(map[byte]int, len(s))
+	charFreqMap := make(map[byte]int, len(s))
 	for i := range s {
-		freqMap[s[i]]++
+		charFreqMap[s[i]]++
 	}
 
-	countCharMap := make([][]byte, len(s)+1)
-	for char, count := range freqMap {
-		countCharMap[count] = append(countCharMap[count], char)
+	FreqCountMap := make([][]byte, len(s)+1)
+	for char, count := range charFreqMap {
+		FreqCountMap[count] = append(FreqCountMap[count], char)
 	}
 
 	sb := strings.Builder{}
 	sb.Grow(len(s))
-	for count := len(countCharMap) - 1; count >= 0; count-- {
-		if len(countCharMap[count]) > 0 {
-			for _, c := range countCharMap[count] {
+	for count := len(FreqCountMap) - 1; count >= 0; count-- {
+		if len(FreqCountMap[count]) > 0 {
+			for _, c := range FreqCountMap[count] {
 				for i := 0; i < count; i++ {
 					sb.WriteByte(c)
 				}
