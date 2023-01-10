@@ -5,7 +5,7 @@ func isSubtree(root *TreeNode, subRoot *TreeNode) bool {
 	for len(queue) != 0 {
 		node := queue[0]
 		queue = queue[1:]
-		if isSameTree(node, subRoot) {
+		if isSubSameTree(node, subRoot) {
 			return true
 		}
 		if node.Left != nil {
@@ -18,7 +18,7 @@ func isSubtree(root *TreeNode, subRoot *TreeNode) bool {
 	return false
 }
 
-func isSameTree(a *TreeNode, b *TreeNode) bool {
+func isSubSameTree(a *TreeNode, b *TreeNode) bool {
 	if a == nil && b == nil {
 		return true
 	}
@@ -29,5 +29,5 @@ func isSameTree(a *TreeNode, b *TreeNode) bool {
 		return false
 	}
 
-	return isSameTree(a.Left, b.Left) && isSameTree(a.Right, b.Right)
+	return isSubSameTree(a.Left, b.Left) && isSubSameTree(a.Right, b.Right)
 }
