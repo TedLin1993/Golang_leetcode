@@ -14,10 +14,10 @@ import "fmt"
 // 3,9,15,... 6n+3
 
 // n = round index
-//row0:(2numRows-2)n
-//row1:(2numRows-2)n+1 and (2numRows-2)n+(2numRows-3)
-//rowk:(2numRows-2)n+k and (2numRows-2)n+(2numRows-2-k)
-//last row: (2numRows-2)n+(2numRows-1)
+// row0:(2numRows-2)n
+// row1:(2numRows-2)n+1 and (2numRows-2)n+(2numRows-3)
+// rowk:(2numRows-2)n+k and (2numRows-2)n+(2numRows-2-k)
+// last row: (2numRows-2)n+(2numRows-1)
 func convert(s string, numRows int) string {
 	if numRows == 1 {
 		return s
@@ -45,7 +45,38 @@ func convert(s string, numRows int) string {
 	return res
 }
 
-func test_convert() {
+func convert_2(s string, numRows int) string {
+	if numRows == 1 {
+		return s
+	}
+	charLists := make([][]byte, numRows)
+	idx := 0
+	isIncrease := true
+	for i := 0; i < len(s); i++ {
+		charLists[idx] = append(charLists[idx], s[i])
+		updateIdx(&idx, &isIncrease, numRows)
+	}
+	res := make([]byte, 0, len(s))
+	for _, charList := range charLists {
+		res = append(res, charList...)
+	}
+	return string(res)
+}
+
+func updateIdx(idx *int, isIncrease *bool, numRows int) {
+	if *idx == 0 {
+		*isIncrease = true
+	} else if *idx == numRows-1 {
+		*isIncrease = false
+	}
+	if *isIncrease {
+		*idx++
+	} else {
+		*idx--
+	}
+}
+
+func Test_convert() {
 	var s string
 	var numRows int
 
