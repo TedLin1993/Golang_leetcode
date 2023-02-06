@@ -3,20 +3,25 @@ package leetcode
 import "fmt"
 
 func vowelStrings(words []string, queries [][]int) []int {
-	isVowels := make([]bool, len(words))
-	for i, word := range words {
-		if isVowel(word) {
-			isVowels[i] = true
+	prefixSum := make([]int, len(words))
+	if isVowel(words[0]) {
+		prefixSum[0] = 1
+	}
+	for i := 1; i < len(words); i++ {
+		if isVowel(words[i]) {
+			prefixSum[i] = prefixSum[i-1] + 1
+		} else {
+			prefixSum[i] = prefixSum[i-1]
 		}
 	}
 
 	res := make([]int, len(queries))
 	for i, query := range queries {
 		start, end := query[0], query[1]
-		for j := start; j <= end; j++ {
-			if isVowels[j] {
-				res[i]++
-			}
+		if start == 0 {
+			res[i] = prefixSum[end]
+		} else {
+			res[i] = prefixSum[end] - prefixSum[start-1]
 		}
 	}
 	return res
