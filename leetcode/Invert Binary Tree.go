@@ -4,19 +4,16 @@ func invertTree(root *TreeNode) *TreeNode {
 	if root == nil {
 		return nil
 	}
-	res := &TreeNode{Val: root.Val}
-	node := res
-	dfs_invertTree(root, node)
-	return res
+	dfs_invertTree(root)
+	return root
 }
 
-func dfs_invertTree(originNode, inverseNode *TreeNode) {
-	if originNode.Left != nil {
-		inverseNode.Right = &TreeNode{Val: originNode.Left.Val}
-		dfs_invertTree(originNode.Left, inverseNode.Right)
+func dfs_invertTree(node *TreeNode) {
+	node.Left, node.Right = node.Right, node.Left
+	if node.Left != nil {
+		dfs_invertTree(node.Left)
 	}
-	if originNode.Right != nil {
-		inverseNode.Left = &TreeNode{Val: originNode.Right.Val}
-		dfs_invertTree(originNode.Right, inverseNode.Left)
+	if node.Right != nil {
+		dfs_invertTree(node.Right)
 	}
 }
