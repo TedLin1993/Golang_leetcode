@@ -13,18 +13,18 @@ func pacificAtlantic(heights [][]int) [][]int {
 
 	//pacific
 	for r := 0; r < length; r++ {
-		dfs(r, 0, length, width, &p, heights, 0)
+		dfs_pacificAtlantic(r, 0, length, width, &p, heights, 0)
 	}
 	for c := 0; c < width; c++ {
-		dfs(0, c, length, width, &p, heights, 0)
+		dfs_pacificAtlantic(0, c, length, width, &p, heights, 0)
 	}
 
 	//atlantic
 	for r := 0; r < length; r++ {
-		dfs(r, width-1, length, width, &a, heights, 0)
+		dfs_pacificAtlantic(r, width-1, length, width, &a, heights, 0)
 	}
 	for c := 0; c < width; c++ {
-		dfs(length-1, c, length, width, &a, heights, 0)
+		dfs_pacificAtlantic(length-1, c, length, width, &a, heights, 0)
 	}
 
 	res := [][]int{}
@@ -38,7 +38,7 @@ func pacificAtlantic(heights [][]int) [][]int {
 
 	return res
 }
-func dfs(r, c, length, width int, hit *[][]int, heights [][]int, theHeight int) {
+func dfs_pacificAtlantic(r, c, length, width int, hit *[][]int, heights [][]int, theHeight int) {
 	//check valid
 	if r < 0 || r >= length || c < 0 || c >= width {
 		return
@@ -53,8 +53,8 @@ func dfs(r, c, length, width int, hit *[][]int, heights [][]int, theHeight int) 
 
 	(*hit)[r][c] = 1
 
-	dfs(r-1, c, length, width, hit, heights, heights[r][c])
-	dfs(r+1, c, length, width, hit, heights, heights[r][c])
-	dfs(r, c-1, length, width, hit, heights, heights[r][c])
-	dfs(r, c+1, length, width, hit, heights, heights[r][c])
+	dfs_pacificAtlantic(r-1, c, length, width, hit, heights, heights[r][c])
+	dfs_pacificAtlantic(r+1, c, length, width, hit, heights, heights[r][c])
+	dfs_pacificAtlantic(r, c-1, length, width, hit, heights, heights[r][c])
+	dfs_pacificAtlantic(r, c+1, length, width, hit, heights, heights[r][c])
 }
