@@ -8,9 +8,7 @@ func divisibilityArray(word string, m int) []int {
 	res := make([]int, len(word))
 	value := 0
 	for i := 0; i < len(word); i++ {
-		temp := int(word[i] - '0')
-		value = value*10 + temp
-		value %= m
+		value = (value*10 + int(word[i]-'0')) % m
 		if value == 0 {
 			res[i] = 1
 		}
