@@ -3,5 +3,5 @@ package main
 import "leetcode/leetcode"
 
 func main() {
-	leetcode.Test_substringXorQueries()
+	leetcode.Test_findValidSplit()
 }

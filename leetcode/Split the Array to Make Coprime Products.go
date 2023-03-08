@@ -3,33 +3,50 @@ package leetcode
 import "fmt"
 
 func findValidSplit(nums []int) int {
-	suffixProduct := 1
+	totalFactorMap := make(map[int]int)
 	for _, num := range nums {
-		suffixProduct *= num
+		factorMap := getFactor(num)
+		for k, v := range factorMap {
+			totalFactorMap[k] += v
+		}
 	}
-	prefixProduct := 1
+	currentFactorMap := make(map[int]int)
+	commonFatorCount := 0
 	for i := 0; i < len(nums)-1; i++ {
-		suffixProduct /= nums[i]
-		prefixProduct *= nums[i]
-		gcd := gcd(suffixProduct, prefixProduct)
-		if gcd == 1 {
+		factorMap := getFactor(nums[i])
+		for k, v := range factorMap {
+			if currentFactorMap[k] == 0 {
+				commonFatorCount++
+			}
+			currentFactorMap[k] += v
+			if currentFactorMap[k] == totalFactorMap[k] {
+				commonFatorCount--
+			}
+		}
+		if commonFatorCount == 0 {
 			return i
 		}
 	}
 	return -1
 }
 
-func gcd(a, b int) int {
-	if a < b {
-		return gcd(b, a)
+func getFactor(num int) map[int]int {
+	res := make(map[int]int)
+	for i := 2; i < 1000 && i < num; i++ {
+		for num%i == 0 {
+			res[i]++
+			num /= i
+		}
 	}
-	if a%b == 0 {
-		return b
+	if num > 1 {
+		res[num] = 1
 	}
-	return gcd(b, a%b)
+	return res
 }
 
 func Test_findValidSplit() {
-	fmt.Println(findValidSplit([]int{4, 7, 8, 15, 3, 5})) //2
-	fmt.Println(findValidSplit([]int{4, 7, 15, 8, 3, 5})) //-1
+	fmt.Println(findValidSplit([]int{4, 7, 8, 15, 3, 5}))                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           //2
+	fmt.Println(findValidSplit([]int{4, 7, 15, 8, 3, 5}))                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           //-1
+	fmt.Println(findValidSplit([]int{557663, 280817, 472963, 156253, 273349, 884803, 756869, 763183, 557663, 964357, 821411, 887849, 891133, 453379, 464279, 574373, 852749, 15031, 156253, 360169, 526159, 410203, 6101, 954851, 860599, 802573, 971693, 279173, 134243, 187367, 896953, 665011, 277747, 439441, 225683, 555143, 496303, 290317, 652033, 713311, 230107, 770047, 308323, 319607, 772907, 627217, 119311, 922463, 119311, 641131, 922463, 404773, 728417, 948281, 612373, 857707, 990589, 12739, 9127, 857963, 53113, 956003, 363397, 768613, 47981, 466027, 981569, 41597, 87149, 55021, 600883, 111953, 119083, 471871, 125641, 922463, 562577, 269069, 806999, 981073, 857707, 831587, 149351, 996461, 432457, 10903, 921091, 119083, 72671, 843289, 567323, 317003, 802129, 612373}))                                                                                                                                                                           //18
+	fmt.Println(findValidSplit([]int{760723, 410383, 396919, 59921, 265567, 148471, 401279, 410387, 827821, 779699, 54767, 946607, 730633, 474391, 706507, 342197, 760723, 667019, 452227, 120943, 420499, 37783, 523903, 342197, 738989, 589807, 667697, 737059, 477821, 593951, 635977, 708913, 946877, 362003, 712289, 112067, 289843, 796693, 593081, 586073, 854999, 302287, 65687, 123419, 44263, 975133, 139429, 660547, 701291, 221603, 808699, 588953, 25703, 855671, 900583, 436757, 404531, 98299, 102643, 225961, 24379, 439279, 251179, 774589, 555739, 16007, 549391, 404531, 263537, 633467, 404099, 565057, 633359, 574733, 993977, 931303, 73121, 472831, 303539, 268993, 146617, 716633, 555739, 343831, 410701, 990967, 371561, 312031, 685369, 289589, 747869, 369269, 464741, 648671, 303547, 105373, 104879, 209257, 891311, 282683, 530869, 275641, 164831, 320669, 279593, 594751, 771517, 952547, 987913, 335459, 13759, 252761, 188767, 839981, 178693})) //23
 }
