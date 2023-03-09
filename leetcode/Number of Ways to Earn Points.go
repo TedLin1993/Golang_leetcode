@@ -2,53 +2,22 @@ package leetcode
 
 import (
 	"fmt"
-	"sort"
 )
 
 func waysToReachTarget(target int, types [][]int) int {
-	sum := 0
+	mod := int(1e9 + 7)
+	dp := make([]int, target+1)
+	dp[0] = 1
 	for _, t := range types {
-		sum += t[0] * t[1]
-	}
-	if sum < target {
-		return 0
-	}
-	if sum == target {
-		return 1
-	}
-	sort.Slice(types, func(i, j int) bool {
-		return types[i][1] > types[j][1]
-	})
-	return dfs_waysToReachTarget(target,
-		
-		
-		
-		
-		
-		
-		types, 0)
-}
-
-func dfs_waysToReachTarget(target int, types [][]int, typeIdx int) int {
-	if typeIdx >= len(types) {
-		return 0
-	}
-	modulo := 1000000007
-	typeCount := types[typeIdx][0]
-	typeMarks := types[typeIdx][1]
-	res := dfs_waysToReachTarget(target, types, typeIdx+1)
-	for i := 0; i < typeCount; i++ {
-		target -= typeMarks
-		if target == 0 {
-			return res + 1
+		count, mark := t[0], t[1]
+		for currentTarget := target; currentTarget >= mark; currentTarget-- {
+			for i := 1; i <= count && i*mark <= currentTarget; i++ {
+				dp[currentTarget] += dp[currentTarget-i*mark]
+			}
+			dp[currentTarget] %= mod
 		}
-		if target < 0 {
-			return res
-		}
-		res += dfs_waysToReachTarget(target, types, typeIdx+1)
-		res %= modulo
 	}
-	return res
+	return dp[target]
 }
 
 func Test_waysToReachTarget() {
