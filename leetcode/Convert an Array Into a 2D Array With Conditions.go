@@ -2,21 +2,18 @@ package leetcode
 
 func findMatrix(nums []int) [][]int {
 	numMap := make(map[int]int, len(nums))
+	rowCount := 0
 	for _, num := range nums {
 		numMap[num]++
-	}
-	res := make([][]int, 0, len(nums))
-	count := len(nums)
-	for count > 0 {
-		temp := make([]int, 0, count)
-		for k := range numMap {
-			if numMap[k] > 0 {
-				temp = append(temp, k)
-				numMap[k]--
-				count--
-			}
+		if numMap[num] > rowCount {
+			rowCount = numMap[num]
 		}
-		res = append(res, temp)
+	}
+	res := make([][]int, rowCount)
+	for k := range numMap {
+		for i := 0; i < numMap[k]; i++ {
+			res[i] = append(res[i], k)
+		}
 	}
 	return res
 }
