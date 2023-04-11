@@ -8,12 +8,11 @@ func diagonalPrime(nums [][]int) int {
 	res := 0
 	n := len(nums)
 	for i := 0; i < n; i++ {
-		for j := 0; j < n; j++ {
-			if i == j || j == n-i-1 {
-				if isPrime(nums[i][j]) && nums[i][j] > res {
-					res = nums[i][j]
-				}
-			}
+		if nums[i][i] > res && isPrime(nums[i][i]) {
+			res = nums[i][i]
+		}
+		if nums[i][n-i-1] > res && isPrime(nums[i][n-i-1]) {
+			res = nums[i][n-i-1]
 		}
 	}
 	return res
