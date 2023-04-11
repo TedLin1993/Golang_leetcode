@@ -2,15 +2,17 @@ package leetcode
 
 import (
 	"fmt"
-	"math"
 )
 
 func diagonalPrime(nums [][]int) int {
 	res := 0
-	for i := 0; i < len(nums); i++ {
-		for j := 0; j < len(nums); j++ {
-			if (i == j || j == len(nums)-i-1) && isPrime(nums[i][j]) {
-				res = max(res, nums[i][j])
+	n := len(nums)
+	for i := 0; i < n; i++ {
+		for j := 0; j < n; j++ {
+			if i == j || j == n-i-1 {
+				if isPrime(nums[i][j]) && nums[i][j] > res {
+					res = nums[i][j]
+				}
 			}
 		}
 	}
@@ -21,11 +23,7 @@ func isPrime(num int) bool {
 	if num == 1 {
 		return false
 	}
-	if num == 2 {
-		return true
-	}
-	sq_root := int(math.Sqrt(float64(num)))
-	for i := 2; i <= sq_root; i++ {
+	for i := 2; i*i <= num; i++ {
 		if num%i == 0 {
 			return false
 		}

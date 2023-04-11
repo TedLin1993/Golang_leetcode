@@ -34,18 +34,17 @@ func sumOfDistanceDifferences(nums []int) []int {
 	}
 	res := make([]int, length)
 	res[0] = preSum[length-1]
-	for i := 1; i < len(res)-1; i++ {
-		rightSum := preSum[length-1] - preSum[i] - (length-i-1)*(nums[i]-nums[0])
+	for i := 1; i < len(res); i++ {
 		leftSum := (i+1)*(nums[i]-nums[0]) - preSum[i]
+		rightSum := preSum[length-1] - preSum[i] - (length-i-1)*(nums[i]-nums[0])
 		res[i] = leftSum + rightSum
 	}
-	res[length-1] = (length)*(nums[length-1]-nums[0]) - preSum[length-1]
 	return res
 }
 
 func Test_distance() {
-	// fmt.Println(distance([]int{1, 3, 1, 1, 2}))       //[5,0,3,4,0]
-	// fmt.Println(distance([]int{0, 5, 3}))             //[0 0 0]
-	// fmt.Println(distance([]int{1, 1, 1, 1, 1}))       //[10 7 6 7 10]
+	fmt.Println(distance([]int{1, 3, 1, 1, 2}))       //[5,0,3,4,0]
+	fmt.Println(distance([]int{0, 5, 3}))             //[0 0 0]
+	fmt.Println(distance([]int{1, 1, 1, 1, 1}))       //[10 7 6 7 10]
 	fmt.Println(distance([]int{2, 0, 2, 2, 6, 5, 2})) //[11,0,7,7,0,0,13]
 }
