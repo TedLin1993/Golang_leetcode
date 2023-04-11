@@ -43,6 +43,7 @@ func abs(a int) int {
 }
 
 type MaxHeap []int
+
 func (h MaxHeap) Len() int           { return len(h) }
 func (h MaxHeap) Less(i, j int) bool { return h[i] > h[j] }
 func (h MaxHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
@@ -58,6 +59,7 @@ func (h *MaxHeap) Pop() interface{} {
 }
 
 type MinHeap []int
+
 func (h MinHeap) Len() int           { return len(h) }
 func (h MinHeap) Less(i, j int) bool { return h[i] < h[j] }
 func (h MinHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
@@ -83,4 +85,10 @@ func maxArr(arr []int) int {
 		res = max(res, arr[i])
 	}
 	return res
+}
+
+func reverseByteArr(s []byte) {
+	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+		s[i], s[j] = s[j], s[i]
+	}
 }
