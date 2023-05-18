@@ -32,3 +32,37 @@ func updateMatrix(mat [][]int) [][]int {
 	}
 	return mat
 }
+
+func updateMatrix_dp(mat [][]int) [][]int {
+	m, n := len(mat), len(mat[0])
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if mat[i][j] == 0 {
+				continue
+			}
+			temp := 10001
+			if i > 0 {
+				temp = min(temp, mat[i-1][j]+1)
+			}
+			if j > 0 {
+				temp = min(temp, mat[i][j-1]+1)
+			}
+			mat[i][j] = temp
+		}
+	}
+
+	for i := m - 1; i >= 0; i-- {
+		for j := n - 1; j >= 0; j-- {
+			if mat[i][j] == 0 {
+				continue
+			}
+			if i < m-1 {
+				mat[i][j] = min(mat[i][j], mat[i+1][j]+1)
+			}
+			if j < n-1 {
+				mat[i][j] = min(mat[i][j], mat[i][j+1]+1)
+			}
+		}
+	}
+	return mat
+}
