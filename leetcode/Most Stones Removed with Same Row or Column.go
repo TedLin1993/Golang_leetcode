@@ -10,27 +10,27 @@ func removeStones(stones [][]int) int {
 	islandCount = 0
 	columnAdd := 1001
 	for i := 0; i < len(stones); i++ {
-		union(stones[i][0], stones[i][1]+columnAdd)
+		union_removeStones(stones[i][0], stones[i][1]+columnAdd)
 	}
 	return len(stones) - islandCount
 }
 
-func union(a, b int) {
-	a = find(a)
-	b = find(b)
+func union_removeStones(a, b int) {
+	a = find_removeStones(a)
+	b = find_removeStones(b)
 	if a != b {
 		islandMap[a] = b
 		islandCount--
 	}
 }
 
-func find(a int) int {
+func find_removeStones(a int) int {
 	if islandMap[a] == 0 {
 		islandMap[a] = a
 		islandCount++
 	}
 	if a != islandMap[a] {
-		islandMap[a] = find(islandMap[a])
+		islandMap[a] = find_removeStones(islandMap[a])
 	}
 	return islandMap[a]
 }
