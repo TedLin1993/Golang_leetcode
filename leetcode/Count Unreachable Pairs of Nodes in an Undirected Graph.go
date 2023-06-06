@@ -8,10 +8,10 @@ func countPairs(n int, edges [][]int) int64 {
 		originMap[idx] = idx
 	}
 	for _, edge := range edges {
-		union(edge[0], edge[1])
+		countPairs_union(edge[0], edge[1])
 	}
 	for i := 0; i < n; i++ {
-		find(i)
+		countPairs_find(i)
 	}
 
 	countMap := make(map[int]int64, n)
@@ -33,12 +33,12 @@ func countPairs_find(node int) int {
 	if originMap[node] == node {
 		return node
 	}
-	originMap[node] = find(originMap[node])
+	originMap[node] = countPairs_find(originMap[node])
 	return originMap[node]
 }
 
 func countPairs_union(node1, node2 int) {
-	node1, node2 = find(node1), find(node2)
+	node1, node2 = countPairs_find(node1), countPairs_find(node2)
 	if node1 < node2 {
 		originMap[node2] = node1
 	} else {
