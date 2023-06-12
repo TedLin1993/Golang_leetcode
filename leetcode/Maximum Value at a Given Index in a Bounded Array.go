@@ -3,8 +3,11 @@ package leetcode
 import "fmt"
 
 func maxValue(n int, index int, maxSum int) int {
+	if n == 1 {
+		return maxSum
+	}
 	left, right := 1, maxSum
-	for left <= right {
+	for left < right {
 		mid := left + (right-left)/2
 		leftSum := 0
 		if mid-index >= 1 {
