@@ -42,6 +42,14 @@ func abs(a int) int {
 	return a
 }
 
+func sumArr(nums []int) int {
+	res := 0
+	for _, num := range nums {
+		res += num
+	}
+	return res
+}
+
 type MaxHeap []int
 
 func (h MaxHeap) Len() int           { return len(h) }
