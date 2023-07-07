@@ -7,6 +7,17 @@ import (
 func diagonalPrime(nums [][]int) int {
 	res := 0
 	n := len(nums)
+	isPrime := func(num int) bool {
+		if num == 1 {
+			return false
+		}
+		for i := 2; i*i <= num; i++ {
+			if num%i == 0 {
+				return false
+			}
+		}
+		return true
+	}
 	for i := 0; i < n; i++ {
 		if nums[i][i] > res && isPrime(nums[i][i]) {
 			res = nums[i][i]
@@ -16,18 +27,6 @@ func diagonalPrime(nums [][]int) int {
 		}
 	}
 	return res
-}
-
-func isPrime(num int) bool {
-	if num == 1 {
-		return false
-	}
-	for i := 2; i*i <= num; i++ {
-		if num%i == 0 {
-			return false
-		}
-	}
-	return true
 }
 
 func Test_diagonalPrime() {
