@@ -1,13 +1,5 @@
 package leetcode
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
 func distanceK(root *TreeNode, target *TreeNode, k int) []int {
 	max := 500
 	nodeMap := make([][]int, max+1)
