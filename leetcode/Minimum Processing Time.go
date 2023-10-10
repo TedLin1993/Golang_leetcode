@@ -1,6 +1,8 @@
 package leetcode
 
-import "sort"
+import (
+	"sort"
+)
 
 func minProcessingTime(processorTime []int, tasks []int) int {
 	res := 0
