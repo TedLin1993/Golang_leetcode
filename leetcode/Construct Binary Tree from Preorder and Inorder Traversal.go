@@ -3,26 +3,22 @@ package leetcode
 import "fmt"
 
 func buildTree(preorder []int, inorder []int) *TreeNode {
-	if len(preorder) == 1 {
-		return &TreeNode{Val: preorder[0]}
+	n := len(preorder)
+	if n == 0 {
+		return nil
 	}
 
-	node := &TreeNode{Val: preorder[0]}
-	rootInorderIndex := 0
-	for i := 0; i < len(inorder); i++ {
-		if inorder[i] == preorder[0] {
-			rootInorderIndex = i
+	cur := TreeNode{Val: preorder[0]}
+	curIdx := 0
+	for i := 0; i < n; i++ {
+		if inorder[i] == cur.Val {
+			curIdx = i
 			break
 		}
 	}
-	if rootInorderIndex >= 1 {
-		node.Left = buildTree(preorder[1:rootInorderIndex+1], inorder[:rootInorderIndex])
-	}
-	if rootInorderIndex < len(preorder)-1 {
-		node.Right = buildTree(preorder[rootInorderIndex+1:], inorder[rootInorderIndex+1:])
-	}
-
-	return node
+	cur.Left = buildTree(preorder[1:curIdx+1], inorder[:curIdx])
+	cur.Right = buildTree(preorder[curIdx+1:], inorder[curIdx+1:])
+	return &cur
 }
 
 func TestbuildTree() {
