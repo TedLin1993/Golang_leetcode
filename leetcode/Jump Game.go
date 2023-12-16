@@ -24,6 +24,20 @@ func canJump(nums []int) bool {
 	return false
 }
 
+func canJump_dp(nums []int) bool {
+	cur := 0
+	for i, v := range nums {
+		if cur < i {
+			return false
+		}
+		cur = max(cur, i+v)
+		if cur >= len(nums)-1 {
+			return true
+		}
+	}
+	return false
+}
+
 func Test_canJump() {
 	fmt.Println(canJump([]int{2, 3, 1, 1, 4})) //true
 	fmt.Println(canJump([]int{3, 2, 1, 0, 4})) //false
