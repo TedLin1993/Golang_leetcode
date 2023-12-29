@@ -2,71 +2,39 @@ package leetcode
 
 import "fmt"
 
-var charResultMap []int
-var charMap []int
-
 func minWindow(s string, t string) string {
-	if len(s) < len(t) {
-		return ""
+	m, n := len(s), len(t)
+	charMap := map[byte]int{}
+	for i := 0; i < n; i++ {
+		charMap[t[i]]++
 	}
-
-	charResultMap = make([]int, 128)
-	charMap = make([]int, 128)
-	for i := 0; i < len(t); i++ {
-		charResultMap[t[i]]++
-	}
-
-	//get first substring reaching result
-	leftIndex, rightIndex := 0, 0
-	resultCount := 0
-	for rightIndex < len(s) {
-		if charResultMap[s[rightIndex]] > 0 {
-			charMap[s[rightIndex]]++
-			if charMap[s[rightIndex]] <= charResultMap[s[rightIndex]] {
-				resultCount++
-			}
-			if resultCount == len(t) {
-				break
-			}
+	minLen := m + 1
+	res := ""
+	tCount := 0
+	l := 0
+	for r := 0; r < m; r++ {
+		if _, ok := charMap[s[r]]; !ok {
+			continue
 		}
-		rightIndex++
-	}
-	if resultCount < len(t) {
-		return ""
-	}
-	leftIndex = getLeftIndex(s, leftIndex, rightIndex)
-
-	//sliding windows to get result
-	res := s[leftIndex : rightIndex+1]
-	rightIndex++
-	for rightIndex < len(s) {
-		if charResultMap[s[rightIndex]] > 0 {
-			charMap[s[rightIndex]]++
-			if s[rightIndex] == s[leftIndex] {
-				leftIndex = getLeftIndex(s, leftIndex, rightIndex)
-				if rightIndex-leftIndex+1 < len(res) {
-					res = s[leftIndex : rightIndex+1]
+		charMap[s[r]]--
+		if charMap[s[r]] >= 0 {
+			tCount++
+		}
+		for tCount == n {
+			if r-l+1 < minLen {
+				minLen = r - l + 1
+				res = s[l : r+1]
+			}
+			if _, ok := charMap[s[l]]; ok {
+				charMap[s[l]]++
+				if charMap[s[l]] > 0 {
+					tCount--
 				}
 			}
+			l++
 		}
-		rightIndex++
 	}
-
 	return res
-}
-
-func getLeftIndex(s string, leftIndex int, rightIndex int) int {
-	for leftIndex <= rightIndex {
-		if charResultMap[s[leftIndex]] > 0 {
-			if charMap[s[leftIndex]] != charResultMap[s[leftIndex]] {
-				charMap[s[leftIndex]]--
-			} else {
-				break
-			}
-		}
-		leftIndex++
-	}
-	return leftIndex
 }
 
 func TestminWindow() {
