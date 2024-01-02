@@ -1,7 +1,9 @@
 package leetcode
 
 import (
+	"cmp"
 	"fmt"
+	"slices"
 	"sort"
 	"strconv"
 	"strings"
@@ -30,6 +32,22 @@ func largestNumber(nums []int) string {
 		return "0"
 	}
 	return strings.Join(numsStr, "")
+}
+
+func largestNumber_2(nums []int) string {
+	n := len(nums)
+	numStrs := make([]string, n)
+	for i, num := range nums {
+		numStrs[i] = strconv.Itoa(num)
+	}
+	slices.SortFunc(numStrs, func(a, b string) int {
+		s1, s2 := a+b, b+a
+		return cmp.Compare(s2, s1)
+	})
+	if numStrs[0] == "0" {
+		return "0"
+	}
+	return strings.Join(numStrs, "")
 }
 
 func Test_largestNumber() {
