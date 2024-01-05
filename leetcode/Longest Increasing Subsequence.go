@@ -1,6 +1,9 @@
 package leetcode
 
-import "fmt"
+import (
+	"fmt"
+	"slices"
+)
 
 func lengthOfLIS(nums []int) int {
 	var res []int
@@ -15,7 +18,6 @@ func lengthOfLIS(nums []int) int {
 			res[j] = temp
 		}
 	}
-	fmt.Println("res=", res)
 	return len(res)
 }
 
@@ -40,11 +42,24 @@ func binarySearch(a []int, temp int) int {
 	return left
 }
 
+func lengthOfLIS_2(nums []int) int {
+	n := len(nums)
+	seq := []int{nums[0]}
+	for i := 1; i < n; i++ {
+		if nums[i] > seq[len(seq)-1] {
+			seq = append(seq, nums[i])
+		} else {
+			idx, _ := slices.BinarySearch(seq, nums[i])
+			seq[idx] = nums[i]
+		}
+	}
+	return len(seq)
+}
+
 func TestLengthOfLIS() {
 	fmt.Println(lengthOfLIS([]int{0, 3, 1, 6, 2, 2, 5})) //4
 	// fmt.Println(lengthOfLIS([]int{10, 9, 2, 5, 3, 7, 101, 18})) //4
 	// fmt.Println(lengthOfLIS([]int{0, 1, 0, 3, 2, 3}))           //4
 	// fmt.Println(lengthOfLIS([]int{7, 7, 7, 7, 7, 7, 7}))        //1
 	// fmt.Println(lengthOfLIS([]int{5, 9, 2, 10})) //4
-
 }
