@@ -43,6 +43,28 @@ func countDigitLength(num int) int {
 	return res
 }
 
+func sequentialDigits_2(low int, high int) []int {
+	var res []int
+	for len := 2; len <= 9; len++ {
+		for i := 1; i <= 9; i++ {
+			if i+len-1 > 9 {
+				break
+			}
+			temp := 0
+			for j := i; j < i+len; j++ {
+				temp = temp*10 + j
+			}
+			if temp >= low && temp <= high {
+				res = append(res, temp)
+			}
+			if temp > high {
+				return res
+			}
+		}
+	}
+	return res
+}
+
 func TestSequentialDigits() {
 	fmt.Println(sequentialDigits(100, 300))
 	fmt.Println(sequentialDigits(1000, 13000))
