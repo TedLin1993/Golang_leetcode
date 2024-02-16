@@ -1,5 +1,7 @@
 package leetcode
 
+import "slices"
+
 func removeStars(s string) string {
 	res := make([]byte, 0, len(s))
 	starCount := 0
@@ -14,7 +16,7 @@ func removeStars(s string) string {
 			}
 		}
 	}
-	reverseByteArr(res)
+	slices.Reverse(res)
 	return string(res)
 }
 
