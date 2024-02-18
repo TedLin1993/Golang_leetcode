@@ -3,5 +3,5 @@ package main
 import "leetcode/leetcode"
 
 func main() {
-	leetcode.TestminWindow()
+	leetcode.Test_mostFrequentPrime()
 }
